@@ -7,6 +7,10 @@ import product1 from "@/assets/product-1.jpg";
 import product2 from "@/assets/product-2.jpg";
 import product3 from "@/assets/product-3.jpg";
 import product4 from "@/assets/product-4.jpg";
+import productBlack from "@/assets/product-black.jpg";
+import productRed from "@/assets/product-red.jpg";
+import productBlue from "@/assets/product-blue.jpg";
+import productYellow from "@/assets/product-yellow.jpg";
 
 const Shop = () => {
   const [selectedSize, setSelectedSize] = useState("all");
@@ -21,6 +25,14 @@ const Shop = () => {
     { id: 6, name: "Relaxed Fit Shirt", price: 92, color: "Beige", size: "XL", image: product2 },
     { id: 7, name: "Slim Fit Dress Shirt", price: 105, color: "White", size: "M", image: product3 },
     { id: 8, name: "Weekend Casual Shirt", price: 88, color: "Brown", size: "L", image: product4 },
+    { id: 9, name: "Classic Black Shirt", price: 99, color: "Black", size: "M", image: productBlack },
+    { id: 10, name: "Burgundy Formal Shirt", price: 115, color: "Red", size: "L", image: productRed },
+    { id: 11, name: "Navy Business Shirt", price: 95, color: "Blue", size: "M", image: productBlue },
+    { id: 12, name: "Mustard Casual Shirt", price: 89, color: "Yellow", size: "L", image: productYellow },
+    { id: 13, name: "Midnight Black Shirt", price: 105, color: "Black", size: "S", image: productBlack },
+    { id: 14, name: "Wine Red Shirt", price: 98, color: "Red", size: "XL", image: productRed },
+    { id: 15, name: "Ocean Blue Shirt", price: 92, color: "Blue", size: "S", image: productBlue },
+    { id: 16, name: "Golden Yellow Shirt", price: 88, color: "Yellow", size: "M", image: productYellow },
   ];
 
   const filteredProducts = products.filter((product) => {
@@ -66,6 +78,10 @@ const Shop = () => {
               <SelectItem value="Beige">Beige</SelectItem>
               <SelectItem value="White">White</SelectItem>
               <SelectItem value="Dark Brown">Dark Brown</SelectItem>
+              <SelectItem value="Black">Black</SelectItem>
+              <SelectItem value="Red">Red</SelectItem>
+              <SelectItem value="Blue">Blue</SelectItem>
+              <SelectItem value="Yellow">Yellow</SelectItem>
             </SelectContent>
           </Select>
 
