@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
+import { useComparison } from "@/contexts/ComparisonContext";
+import ComparisonBar from "@/components/ComparisonBar";
+import ComparisonModal from "@/components/ComparisonModal";
+import { useToast } from "@/hooks/use-toast";
 import product1 from "@/assets/product-1.jpg";
 import product2 from "@/assets/product-2.jpg";
 import product3 from "@/assets/product-3.jpg";
@@ -15,6 +20,9 @@ import productYellow from "@/assets/product-yellow.jpg";
 const Shop = () => {
   const [selectedSize, setSelectedSize] = useState("all");
   const [selectedColor, setSelectedColor] = useState("all");
+  const [comparisonModalOpen, setComparisonModalOpen] = useState(false);
+  const { addToComparison, removeFromComparison, isInComparison, comparisonProducts } = useComparison();
+  const { toast } = useToast();
 
   const products = [
     { id: 1, name: "Classic Oxford Shirt", price: 89, color: "Brown", size: "M", image: product1 },
@@ -41,8 +49,28 @@ const Shop = () => {
     return sizeMatch && colorMatch;
   });
 
+  const handleComparisonToggle = (product: typeof products[0], checked: boolean) => {
+    if (checked) {
+      if (comparisonProducts.length >= 3) {
+        toast({
+          title: "Maximum Reached",
+          description: "You can only compare up to 3 products at a time.",
+          variant: "destructive",
+        });
+        return;
+      }
+      addToComparison(product);
+      toast({
+        title: "Added to Comparison",
+        description: `${product.name} added to comparison.`,
+      });
+    } else {
+      removeFromComparison(product.id);
+    }
+  };
+
   return (
-    <div className="pt-20 min-h-screen">
+    <div className="pt-20 min-h-screen pb-24">
       {/* Header */}
       <section className="bg-secondary/30 py-12">
         <div className="container mx-auto px-4">
@@ -95,8 +123,26 @@ const Shop = () => {
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredProducts.map((product) => (
-            <Link key={product.id} to={`/product/${product.id}`}>
-              <Card className="overflow-hidden hover-lift cursor-pointer group">
+            <Card key={product.id} className="overflow-hidden hover-lift group relative">
+              {/* Comparison Checkbox */}
+              <div className="absolute top-3 left-3 z-10">
+                <div className="flex items-center gap-2 bg-white/90 backdrop-blur-sm rounded-lg p-2 shadow-md">
+                  <Checkbox
+                    id={`compare-${product.id}`}
+                    checked={isInComparison(product.id)}
+                    onCheckedChange={(checked) => handleComparisonToggle(product, checked as boolean)}
+                    disabled={!isInComparison(product.id) && comparisonProducts.length >= 3}
+                  />
+                  <label
+                    htmlFor={`compare-${product.id}`}
+                    className="text-xs font-medium cursor-pointer select-none"
+                  >
+                    Compare
+                  </label>
+                </div>
+              </div>
+
+              <Link to={`/product/${product.id}`}>
                 <div className="aspect-square overflow-hidden relative">
                   <img
                     src={product.image}
@@ -110,8 +156,8 @@ const Shop = () => {
                   <p className="text-sm text-muted-foreground mb-2">{product.color}</p>
                   <p className="text-primary font-medium">${product.price}</p>
                 </div>
-              </Card>
-            </Link>
+              </Link>
+            </Card>
           ))}
         </div>
 
@@ -121,6 +167,12 @@ const Shop = () => {
           </div>
         )}
       </section>
+
+      {/* Comparison Bar */}
+      <ComparisonBar onOpenComparison={() => setComparisonModalOpen(true)} />
+
+      {/* Comparison Modal */}
+      <ComparisonModal open={comparisonModalOpen} onOpenChange={setComparisonModalOpen} />
     </div>
   );
 };
