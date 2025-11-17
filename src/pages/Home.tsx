@@ -14,7 +14,11 @@ import product4 from "@/assets/product-4.jpg";
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
-    { image: hero1, title: "Elegance in Every Stitch", subtitle: "Discover Premium Comfort" },
+    {
+      image: hero1,
+      title: "Elegance in Every Stitch",
+      subtitle: "Ayush dalla noob",
+    },
     { image: hero2, title: "Timeless Style", subtitle: "Crafted with Care" },
     { image: hero3, title: "Organic Luxury", subtitle: "Sustainable Fashion" },
   ];
@@ -34,7 +38,8 @@ const Home = () => {
   }, [slides.length]);
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  const prevSlide = () =>
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
 
   return (
     <div className="pt-20">
@@ -55,10 +60,17 @@ const Home = () => {
             <div className="absolute inset-0 bg-black/30" />
             <div className="absolute inset-0 flex items-center justify-center text-center">
               <div className="text-white space-y-4 fade-in px-4">
-                <h1 className="text-5xl md:text-7xl font-bold tracking-tight">{slide.title}</h1>
-                <p className="text-xl md:text-2xl font-light">{slide.subtitle}</p>
+                <h1 className="text-5xl md:text-7xl font-bold tracking-tight">
+                  {slide.title}
+                </h1>
+                <p className="text-xl md:text-2xl font-light">
+                  {slide.subtitle}
+                </p>
                 <Link to="/shop">
-                  <Button size="lg" className="mt-6 bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg">
+                  <Button
+                    size="lg"
+                    className="mt-6 bg-primary hover:bg-primary/90 text-white px-8 py-6 text-lg"
+                  >
                     Shop Now
                   </Button>
                 </Link>
@@ -98,8 +110,12 @@ const Home = () => {
       {/* Featured Collection */}
       <section className="container mx-auto px-4 py-16">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Featured Collection</h2>
-          <p className="text-muted-foreground">Discover our most loved pieces</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Featured Collection
+          </h2>
+          <p className="text-muted-foreground">
+            Discover our most loved pieces
+          </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -114,7 +130,9 @@ const Home = () => {
                   />
                 </div>
                 <div className="p-4 text-center">
-                  <h3 className="font-semibold text-foreground mb-1">{product.name}</h3>
+                  <h3 className="font-semibold text-foreground mb-1">
+                    {product.name}
+                  </h3>
                   <p className="text-primary font-medium">{product.price}</p>
                 </div>
               </Card>
@@ -124,7 +142,11 @@ const Home = () => {
 
         <div className="text-center mt-8">
           <Link to="/shop">
-            <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary hover:text-white">
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-primary text-primary hover:bg-primary hover:text-white"
+            >
               View All Products
             </Button>
           </Link>
@@ -136,19 +158,25 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div className="space-y-3">
-              <h3 className="text-xl font-semibold text-foreground">Premium Quality</h3>
+              <h3 className="text-xl font-semibold text-foreground">
+                Premium Quality
+              </h3>
               <p className="text-muted-foreground">
                 Every shirt is crafted from the finest organic materials
               </p>
             </div>
             <div className="space-y-3">
-              <h3 className="text-xl font-semibold text-foreground">Sustainable</h3>
+              <h3 className="text-xl font-semibold text-foreground">
+                Sustainable
+              </h3>
               <p className="text-muted-foreground">
                 Committed to ethical production and environmental care
               </p>
             </div>
             <div className="space-y-3">
-              <h3 className="text-xl font-semibold text-foreground">Timeless Design</h3>
+              <h3 className="text-xl font-semibold text-foreground">
+                Timeless Design
+              </h3>
               <p className="text-muted-foreground">
                 Classic styles that transcend trends and seasons
               </p>
