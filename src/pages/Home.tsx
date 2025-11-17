@@ -17,7 +17,7 @@ const Home = () => {
     {
       image: hero1,
       title: "Elegance in Every Stitch",
-      subtitle: "Ayush dalla noob",
+      subtitle: "Ayush lendis",
     },
     { image: hero2, title: "Timeless Style", subtitle: "Crafted with Care" },
     { image: hero3, title: "Organic Luxury", subtitle: "Sustainable Fashion" },
